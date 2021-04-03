@@ -19,4 +19,6 @@ jobs:
     - name: pull image
       run:  |
             echo ${{ steps.qemu.outputs.platforms }}
+            docker login -u _json_key --password-stdin https://us.gcr.io < ${{ secrets.TEST_SECRET_PULL }}
             docker pull us.gcr.io/powergatedev/powerfly
+            docker logout https://us.gcr.io
