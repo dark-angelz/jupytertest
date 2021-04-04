@@ -23,6 +23,7 @@ jobs:
             # echo ${steps.qemu.outputs.platforms}
             echo pop897
             key=${{ secrets.TEST_SECRET_PULL }}
+            echo before login
             echo $key | docker login -u _json_key --password-stdin https://us.gcr.io #< test.pop
             # echo ${LARGE_SECRET_PASSPHRASE} | docker login -u _json_key --password-stdin https://us.gcr.io #< test.pop
             docker pull us.gcr.io/powergatedev/powerfly
