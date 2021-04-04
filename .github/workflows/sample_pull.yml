@@ -18,13 +18,9 @@ jobs:
         platforms: all
     - name: pull image
       env:
-          LARGE_SECRET_PASSPHRASE: ${{ secrets.TEST_SECRET_PULL }}
-      run:  |
-            # echo ${steps.qemu.outputs.platforms}
-            echo pop897
-            key=$(echo ${{ secrets.TEST_SECRET_PULL }})
-            echo before login
-            echo $key | docker login -u _json_key --password-stdin https://us.gcr.io #< test.pop
-            # echo ${LARGE_SECRET_PASSPHRASE} | docker login -u _json_key --password-stdin https://us.gcr.io #< test.pop
+        TEST_SECRET_PULL: ${{ secrets.TEST_SECRET_PULL }}
+        run:  |
+            echo ${steps.qemu.outputs.platforms}
+            echo ${TEST_SECRET_PULL} | docker login -u _json_key --password-stdin https://us.gcr.io
             docker pull us.gcr.io/powergatedev/powerfly
             docker logout https://us.gcr.io
