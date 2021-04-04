@@ -17,10 +17,12 @@ jobs:
         image: tonistiigi/binfmt:latest
         platforms: all
     - name: pull image
+      env:
+          LARGE_SECRET_PASSPHRASE: ${{ secrets.TEST_SECRET_PULL }}
       run:  |
             echo ${steps.qemu.outputs.platforms}
             docker version
-            echo ${secrets.TEST_SECRET_PULL} >test.pop
+            echo ${LARGE_SECRET_PASSPHRASE} >test.pop
             cat test.pop
             docker login -u _json_key --password-stdin https://us.gcr.io < test.pop
             docker pull us.gcr.io/powergatedev/powerfly
