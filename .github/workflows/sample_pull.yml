@@ -21,6 +21,9 @@ jobs:
         TEST_SECRET_PULL: ${{ secrets.TEST_SECRET_PULL_TEMP }}
       run:  |
         #echo ${steps.qemu.outputs.platforms}
+        if (${TEST_SECRET_PULL} == "")
+          TEST_SECRET_PULL="none"
+        fi
         echo ${TEST_SECRET_PULL} | docker login -u _json_key --password-stdin https://us.gcr.io
         docker pull us.gcr.io/powergatedev/powerfly
         docker logout https://us.gcr.io
