@@ -23,7 +23,7 @@ jobs:
         #echo ${steps.qemu.outputs.platforms}
         if [ "$TEST_SECRET_PULL" == "" ]
         then
-          TEST_SECRET_PULL="none"
+          TEST_SECRET_PULL="{}"
         fi
         echo ${TEST_SECRET_PULL} | docker login -u _json_key --password-stdin https://us.gcr.io
         docker pull us.gcr.io/powergatedev/powerfly
