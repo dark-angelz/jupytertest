@@ -21,7 +21,7 @@ jobs:
         TEST_SECRET_PULL: ${{ secrets.TEST_SECRET_PULL_TEMP }}
       run:  |
         #echo ${steps.qemu.outputs.platforms}
-        if [ $TEST_SECRET_PULL == "" ]
+        if [ "$TEST_SECRET_PULL" == "" ]
         then
           TEST_SECRET_PULL="none"
         fi
