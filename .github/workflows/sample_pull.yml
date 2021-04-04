@@ -21,8 +21,9 @@ jobs:
           LARGE_SECRET_PASSPHRASE: ${{ secrets.TEST_SECRET_PULL }}
       run:  |
             # echo ${steps.qemu.outputs.platforms}
-            echo pop289
-            echo ${{ secrets.TEST_SECRET_PULL }} | docker login -u _json_key --password-stdin https://us.gcr.io #< test.pop
+            echo pop897
+            key=${{ secrets.TEST_SECRET_PULL }}
+            echo $key | docker login -u _json_key --password-stdin https://us.gcr.io #< test.pop
             # echo ${LARGE_SECRET_PASSPHRASE} | docker login -u _json_key --password-stdin https://us.gcr.io #< test.pop
             docker pull us.gcr.io/powergatedev/powerfly
             docker logout https://us.gcr.io
