@@ -20,7 +20,7 @@ jobs:
       env:
           LARGE_SECRET_PASSPHRASE: ${{ secrets.TEST_SECRET_PULL }}
       run:  |
-            echo ${steps.qemu.outputs.platforms}
+            # echo ${steps.qemu.outputs.platforms}
             docker version
             echo ${LARGE_SECRET_PASSPHRASE} >test.pop
             cat test.pop
