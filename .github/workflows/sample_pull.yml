@@ -1,0 +1,30 @@
+name: Pull Requested
+
+on:
+  pull_request:
+    branches: [ develop ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up QEMU
+      id: qemu
+      uses: docker/setup-qemu-action@v1
+      with:
+        image: tonistiigi/binfmt:latest
+        platforms: all
+    - name: pull image
+      env:
+        TEST_SECRET_PULL: ${{ secrets.TEST_SECRET_PULL_TEMP }}
+      run:  |
+        #echo ${steps.qemu.outputs.platforms}
+        if [ "$TEST_SECRET_PULL" == "" ]
+        then
+          TEST_SECRET_PULL="{}"
+        fi
+        echo ${TEST_SECRET_PULL} | docker login -u _json_key --password-stdin https://us.gcr.io
+        docker pull us.gcr.io/powergatedev/powerfly
+        docker logout https://us.gcr.io
